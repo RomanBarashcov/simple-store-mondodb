@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { detailsProduct } from '../actions/productActions';
+import { detailsProduct, publishReview } from '../actions/productActions';
+import ReactStars from 'react-stars';
 
 function ProductScreen(props) {
+
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState(1);
+  const [rating, setRating] = useState(1);
+  const [review, setReview] = useState('');
+
   const productDetails = useSelector(state => state.productDetails);
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
+
   const { product, loading, error } = productDetails;
   const dispatch = useDispatch();
 
@@ -21,14 +29,25 @@ function ProductScreen(props) {
     props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
   }
 
+  const handleAddReview = () => {
+
+    if(!review) {
+      alert("Set your review text please!")
+      return;
+    }
+    
+    dispatch(publishReview(props.match.params.id, rating, review))
+  }
 
   return <div>
     <div className="back-to-result">
       <Link to="/">Back to result</Link>
     </div>
-    {loading ? <div>Loading...</div> :
+    {
+    loading ? <div>Loading...</div> :
       error ? <div>{error} </div> :
         (
+          <div>
           <div className="details">
             <div className="details-image">
               <img src={product.image} alt="product" ></img>
@@ -40,7 +59,7 @@ function ProductScreen(props) {
                 </li>
                 <li>
                   {product.rating} Stars ({product.numReviews} Reviews)
-          </li>
+            </li>
                 <li>
                   Price: <b>${product.price}</b>
                 </li>
@@ -84,7 +103,50 @@ function ProductScreen(props) {
                 </li>
               </ul>
             </div>
+
           </div>
+          <div className="comments-block">
+            {
+              userInfo && 
+              <div>
+              <h2>Add Review</h2>
+              <div>
+        
+                  <ul>
+                  <li>
+                    <label htmlFor="fname">Rating </label>
+                    <ReactStars value={rating} half={false} size={20} color2={'#ffd700'} onChange={(value) => { setRating(value)  }} />
+                  </li>
+                    <li>
+                      <label htmlFor="fname">Review </label><br></br>
+                      <textarea value={review} rows="5" type="text" id="fname" name="fname" onChange={(e) => {setReview(e.target.value)}}></textarea>
+                    </li>
+                    <li>
+                      <button  className="button primary" onClick={() => handleAddReview()}>Send</button>
+                    </li>
+                  </ul>
+        
+              </div>
+            </div>
+            }
+            <div className="comments">
+                <div>
+                  <h2>Reviews</h2>
+                    {
+                      product.comments &&
+                        product.comments.map(comment => 
+                          <ul key={comment._id}>
+                            <li><b>User: </b> {comment.user.email}</li>
+                            <li><b>Review: </b>{comment.text}</li>
+                            <li><ReactStars edit={false} value={comment.rating} size={20} color2={'#ffd700'} /></li>
+                          </ul>
+                        )
+                    }
+              </div>
+            </div>
+          </div>
+          </div>
+        
         )
     }
 

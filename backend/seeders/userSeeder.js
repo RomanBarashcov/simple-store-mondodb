@@ -7,6 +7,16 @@ const data = [
         email: 'admin@gmail.com',
         password: '1234',
         isAdmin: true
+    }, {
+        name: 'Alex',
+        email: 'alex@gmail.com',
+        password: '1234',
+        isAdmin: false
+    }, {
+        name: 'Tim',
+        email: 'tim@gmail.com',
+        password: '1234',
+        isAdmin: false
     }
 ];
  

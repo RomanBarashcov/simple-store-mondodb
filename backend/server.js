@@ -6,6 +6,7 @@ import userRoute from './routes/userRoute';
 import productRoute from './routes/productRoute';
 import orderRoute from './routes/orderRoute';
 import categoryRoute from './routes/categoryRoute';
+import commentRoute from './routes/commentRoute';
 
 const mongodbUrl = config.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/products", productRoute);
+app.use("/api/comments", commentRoute);
 app.use("/api/orders", orderRoute);
 app.get("/api/config/paypal", (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);

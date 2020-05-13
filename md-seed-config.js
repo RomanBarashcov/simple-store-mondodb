@@ -4,7 +4,7 @@ import categorySeeder from './backend/seeders/categorySeeder';
 import productSeeder from './backend/seeders/productSeeder';
 import userSeeder from './backend/seeders/userSeeder';
 
-const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/amazona';
+const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/nike-store';
  
 /**
  * Seeders List
@@ -12,9 +12,9 @@ const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/amazona';
  * @type {Object} 
  */
 export const seedersList = {
+    userSeeder,
     categorySeeder,
-    productSeeder,
-    userSeeder
+    productSeeder
 };
 /**
  * Connect to mongodb implementation

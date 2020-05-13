@@ -184,6 +184,37 @@ a:hover{
   display: flex;
   flex-direction: column;
 }
+.comments-block h2{
+  margin: 1rem;
+}
+.comments-block ul {
+  list-style-type: none;
+  padding: 0;
+  flex: 0 1 34rem;
+  margin: 1rem;
+  max-width: 62rem;
+}
+.comments-block li {
+
+  padding-bottom: 1rem;
+
+}
+
+.comments {
+  flex: 1 1 30rem;
+}
+
+.comments ul {
+  list-style-type: none;
+  padding: 0;
+  flex: 0 1 34rem;
+  margin: 1rem;
+  border-bottom: .1rem #c0c0c0 solid;
+  max-width: 62rem;
+}
+.comments li {
+  padding-bottom: 1rem;
+}
 .button{
   padding: 1rem;
   border: .1rem #808080 solid;
