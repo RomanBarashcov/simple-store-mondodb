@@ -1,6 +1,6 @@
 # Simple-Nike-Store-MongoDB
 
-## backand setup
+## backend setup
 ```
 npm install
 ```
@@ -10,7 +10,7 @@ npm install
 npm run seed:data
 ```
 
-## backand start
+## backend start
 ```
 npm start
 ```
