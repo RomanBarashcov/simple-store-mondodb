@@ -11,6 +11,7 @@ function ProductsScreen(props) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [imagePrev, setImagePrev] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
@@ -70,6 +71,11 @@ function ProductsScreen(props) {
       setCategory(e.target.value);
   }
 
+  const selectImage = (e) => {
+    setImage(e.target.files[0]);
+    setImagePrev(URL.createObjectURL(e.target.files[0]));
+  }
+  
   return <div className="content content-margined">
 
     <div className="product-header">
@@ -106,7 +112,9 @@ function ProductsScreen(props) {
               <label htmlFor="image">
                 Image
             </label>
-              <input type="file" name="file" id="image" onChange={(e) => setImage(e.target.files[0])}></input>
+              <input type="file" name="file" id="image" onChange={selectImage}></input>
+              { !imagePrev && <img src={image} style={{  maxHeight: "20rem", maxWidth: "20rem", margin: "auto"}}/> }
+              { imagePrev && <img src={imagePrev} style={{  maxHeight: "20rem", maxWidth: "20rem", margin: "auto"}}/> }
             </li>
             <li>
               <label htmlFor="countInStock">

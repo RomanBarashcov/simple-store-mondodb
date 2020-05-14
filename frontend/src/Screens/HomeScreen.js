@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listCategories } from '../actions/categoryActions';
+import ReactStars from 'react-stars';
 
 function HomeScreen(props) {
 
@@ -60,6 +61,7 @@ function HomeScreen(props) {
       error ? <div>{error}</div> :
         <ul className="products">
           {
+            products && products.length > 0 &&
             products.map(product =>
               <li key={product._id}>
                 <div className="product">
@@ -71,7 +73,7 @@ function HomeScreen(props) {
                     <Link to={'/product/' + product._id}>{product.title}</Link>
                   </div>
                   <div className="product-price">${product.price}</div>
-                  <div className="product-rating">{product.rating} Stars ({product.numReiews} Reviews)</div>
+                  <div className="product-rating"><ReactStars value={product.rating} edit={false} half={true} size={25} color2={'#ffd700'} /> ({product.numReviews} Reviews)</div>
                 </div>
               </li>)
           }

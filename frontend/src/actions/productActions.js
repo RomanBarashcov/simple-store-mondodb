@@ -9,8 +9,10 @@ const listProducts = (category = '', searchKeyword = '', sortOrder = '') => asyn
   try {
 
     dispatch({ type: PRODUCT_LIST_REQUEST });
+
     const { data } = await axios.get("/api/products?category=" + category +
       "&searchKeyword=" + searchKeyword + "&sortOrder=" + sortOrder);
+
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   }
   catch (error) {
@@ -21,6 +23,7 @@ const listProducts = (category = '', searchKeyword = '', sortOrder = '') => asyn
 
 const saveProduct = (product, image) => async (dispatch, getState) => {
   try {
+
     dispatch({ type: PRODUCT_SAVE_REQUEST, payload: product });
     const { userSignin: { userInfo } } = getState();
     if (!product._id) {
@@ -79,18 +82,19 @@ const saveProduct = (product, image) => async (dispatch, getState) => {
 
 const detailsProduct = (productId) => async (dispatch) => {
   try {
+
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
     const { data } = await axios.get("/api/products/" + productId);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
-
   }
 }
 
 const publishReview = (productId, rating, text) =>  async (dispatch, getState) => {
   try {
-    alert("KEKE")
+
     const { userSignin: { userInfo } } = getState();
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
 
@@ -111,24 +115,51 @@ const publishReview = (productId, rating, text) =>  async (dispatch, getState) =
 
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
+  }
+}
 
+const deleteReview = (productId, reviewId) =>  async (dispatch, getState) => {
+  try {
+
+    const { userSignin: { userInfo } } = getState();
+    dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
+
+    const payload = {
+      productId: productId,
+      commentId: reviewId
+    }
+
+    let result  = await Axios.post(`/api/comments/delete`, payload, {
+      headers: {
+        'Authorization': 'Bearer ' + userInfo.token
+      }
+    });
+
+    const { data } = await axios.get("/api/products/" + productId);
+    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
   }
 }
 
 const deleteProdcut = (productId) => async (dispatch, getState) => {
   try {
+
     const { userSignin: { userInfo } } = getState();
     dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
+
     const { data } = await axios.delete("/api/products/" + productId, {
       headers: {
         Authorization: 'Bearer ' + userInfo.token
       }
     });
+
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data, success: true });
+
   } catch (error) {
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
-
   }
 }
 
-export { listProducts, detailsProduct, saveProduct, publishReview, deleteProdcut }
+export { listProducts, detailsProduct, saveProduct, publishReview, deleteReview, deleteProdcut }

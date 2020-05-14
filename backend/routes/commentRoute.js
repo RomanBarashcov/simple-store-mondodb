@@ -4,7 +4,7 @@ import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
 
-router.post("/delete", async (req, res) => {
+router.post("/delete", isAuth, isAdmin, async (req, res) => {
   try {
 
     const productId = req.body.productId;
@@ -26,15 +26,21 @@ router.post("/delete", async (req, res) => {
   }
 });
 
-router.post("/:productId", async (req, res) => {
+router.post("/:productId", isAuth, async (req, res) => {
     try {
 
       const comment = req.body;
 
       let product = await Product.findById(req.params.productId)
       if(!product) return res.send("Error in add new comment.");
-    
-      let updateResult = await Product.updateOne({ _id: req.params.productId }, { 
+
+      // cal reviews and rating
+      const numReviews = product.comments.length + 1;
+      const rating = (product.comments.reduce((acc, com) => acc + com.rating, 0) + comment.rating) / numReviews;
+
+      let updateResult = await Product.updateOne({ _id: req.params.productId }, {
+          numReviews: numReviews,
+          rating: rating,
           $push: { 
               comments: { 
                   rating: comment.rating, 
@@ -54,7 +60,7 @@ router.post("/:productId", async (req, res) => {
     }
   });
 
-  router.put("/:productId", async (req, res) => {
+  router.put("/:productId", isAuth, async (req, res) => {
     try {
   
       const comment = req.body.comment;

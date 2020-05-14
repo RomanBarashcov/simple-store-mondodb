@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     const category = req.query.category ? { category: req.query.category } : {};
 
     const searchKeyword = req.query.searchKeyword ? {
-      name: {
+      title: {
         $regex: req.query.searchKeyword,
         $options: 'i'
       }
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
       { _id: -1 };
 
     let products = await Product.find({ ...category, ...searchKeyword }).sort(sortOrder);
-    res.send(products);
+    return res.send(products);
 
   } catch (err) {
     console.log(err);
@@ -38,11 +38,11 @@ router.get("/:id", async (req, res) => {
       const product = await Product.findOne({ _id: req.params.id }).populate("comments.user");
       if (product) {
 
-        res.send(product);
+        return res.send(product);
 
       } else {
 
-        res.status(404).send({ message: "Product Not Found." });
+        return res.status(404).send({ message: "Product Not Found." });
 
       }
 
@@ -88,10 +88,10 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
     if (deletedProduct) {
 
       await deletedProduct.remove();
-      res.send({ message: "Product Deleted" });
+      return res.send({ message: "Product Deleted" });
 
     } else {
-      res.send("Error in Deletion.");
+      return res.send("Error in Deletion.");
     }
 
   } catch (err) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { detailsProduct, publishReview } from '../actions/productActions';
+import { detailsProduct, publishReview, deleteReview } from '../actions/productActions';
 import ReactStars from 'react-stars';
 
 function ProductScreen(props) {
@@ -37,6 +37,20 @@ function ProductScreen(props) {
     }
     
     dispatch(publishReview(props.match.params.id, rating, review))
+
+    //destroy
+    setRating(1);
+    setReview('');
+
+  }
+
+  const handlerDeleteReview = (id) => {
+
+    if(!userInfo && !userInfo.isAdmin) return;
+    if (!window.confirm('Are you sure you want to delete rewiew?')) return;
+
+    dispatch(deleteReview(props.match.params.id, id))
+
   }
 
   return <div>
@@ -58,7 +72,7 @@ function ProductScreen(props) {
                   <h4>{product.title}</h4>
                 </li>
                 <li>
-                  {product.rating} Stars ({product.numReviews} Reviews)
+                  <ReactStars value={product.rating} edit={false} half={true} size={25} color2={'#ffd700'} /> ({product.numReviews} Reviews)
             </li>
                 <li>
                   Price: <b>${product.price}</b>
@@ -139,6 +153,9 @@ function ProductScreen(props) {
                             <li><b>User: </b> {comment.user.email}</li>
                             <li><b>Review: </b>{comment.text}</li>
                             <li><ReactStars edit={false} value={comment.rating} size={20} color2={'#ffd700'} /></li>
+                              { userInfo && 
+                                userInfo.isAdmin && 
+                                <li> <button  className="button primary" onClick={() => handlerDeleteReview(comment._id)}>Delete</button></li> }
                           </ul>
                         )
                     }
