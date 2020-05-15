@@ -44,7 +44,7 @@ router.post("/:productId", isAuth, async (req, res) => {
           $push: { 
               comments: { 
                   rating: comment.rating, 
-                  text: comment.text, 
+                  text: comment.text,
                   user: comment.user 
                 } 
             } 
