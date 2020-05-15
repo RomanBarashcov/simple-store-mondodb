@@ -5,7 +5,7 @@ import User from '../models/userModel';
 
 const data = [{
     title: "Nike Air Max 2090",
-    image:"/images/с1_im1.jpg",
+    image:"/images/cat1im1.jpg",
     price: 150,
     category: "Lifestyle",
     countInStock: 15,
@@ -14,7 +14,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Air VaporMax 360",
-    image:"/images/с1_im2.jpg",
+    image:"/images/cat1im2.jpg",
     price: 225,
     category: "Lifestyle",
     countInStock: 20,
@@ -23,7 +23,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Air Max 90",
-    image:"/images/с1_im3.jpg",
+    image:"/images/cat1im3.jpg",
     price: 120,
     category: "Lifestyle",
     countInStock: 14,
@@ -32,7 +32,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Air VaporMax Flyknit 3",
-    image:"/images/с1_im4.jpg",
+    image:"/images/cat1im4.jpg",
     price: 200,
     category: "Lifestyle",
     countInStock: 18,
@@ -41,7 +41,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Daybreak-Type",
-    image:"/images/с1_im5.jpg",
+    image:"/images/cat1im5.jpg",
     price: 90,
     category: "Lifestyle",
     countInStock: 25,
@@ -50,7 +50,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Air Jordan 4 Retro",
-    image:"/images/с2_im1.jpg",
+    image:"/images/cat2im1.jpg",
     price: 190,
     category: "Jordan",
     countInStock: 20,
@@ -59,7 +59,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Air Jordan 1 Low",
-    image:"/images/с2_im2.jpg",
+    image:"/images/cat2im2.jpg",
     price: 110,
     category: "Jordan",
     countInStock: 10,
@@ -68,7 +68,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Air Jordan 1 Low",
-    image:"/images/с2_im3.jpg",
+    image:"/images/cat2im3.jpg",
     price: 90,
     category: "Jordan",
     countInStock: 14,
@@ -77,7 +77,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Air Jordan 1 Mid",
-    image:"/images/с2_im4.jpg",
+    image:"/images/cat2im4.jpg",
     price: 115,
     category: "Jordan",
     countInStock: 19,
@@ -86,7 +86,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Air Jordan XXXIV Low",
-    image:"/images/с2_im5.jpg",
+    image:"/images/cat2im5.jpg",
     price: 165,
     category: "Jordan",
     countInStock: 10,
@@ -95,7 +95,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Air Zoom Pegasus 37",
-    image:"/images/с3_im1.jpg",
+    image:"/images/cat3im1.jpg",
     price: 120,
     category: "Running",
     countInStock: 10,
@@ -104,7 +104,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike React Phantom Run Flyknit 2",
-    image:"/images/c3_im2.jpg",
+    image:"/images/cat3im2.jpg",
     price: 140,
     category: "Running",
     countInStock: 25,
@@ -113,7 +113,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike React Infinity Run Flyknit",
-    image:"/images/c3_im3.jpg",
+    image:"/images/cat3im3.jpg",
     price: 160,
     category: "Running",
     countInStock: 100,
@@ -122,7 +122,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Zoom Pegasus Turbo 2",
-    image:"/images/c3_im4.jpg",
+    image:"/images/cat3im4.jpg",
     price: 180,
     category: "Running",
     countInStock: 12,
@@ -131,7 +131,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Air Zoom Pegasus 36 Trail",
-    image:"/images/c3_im5.jpg",
+    image:"/images/cat3im5.jpg",
     price: 130,
     category: "Running",
     countInStock: 5,
@@ -140,7 +140,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "LeBron 17",
-    image:"/images/с4_im1.jpg",
+    image:"/images/cat4im1.jpg",
     price: 200,
     category: "Basketball",
     countInStock: 24,
@@ -149,7 +149,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "PG 4 PCG",
-    image:"/images/с4_im2.jpg",
+    image:"/images/cat4im2.jpg",
     price: 120,
     category: "Basketball",
     countInStock: 15,
@@ -158,7 +158,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "KD13 Chill",
-    image:"/images/с4_im3.jpg",
+    image:"/images/cat4im3.jpg",
     price: 160,
     category: "Basketball",
     countInStock: 16,
@@ -167,7 +167,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "LeBron 17 Low",
-    image:"/images/с4_im4.jpg",
+    image:"/images/cat4im4.jpg",
     price: 160,
     category: "Basketball",
     countInStock: 20,
@@ -176,7 +176,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "PG 4",
-    image:"/images/с4_im5.jpg",
+    image:"/images/cat4im5.jpg",
     price: 90,
     category: "Basketball",
     countInStock: 17,
@@ -185,7 +185,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Nike Vapor Edge Elite 360 OBJ",
-    image:"/images/с5_im1.jpg",
+    image:"/images/cat5im1.jpg",
     price: 200,
     category: "Football",
     countInStock: 20,
@@ -194,7 +194,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Vapor Edge Turf",
-    image:"/images/с5_im2.jpg",
+    image:"/images/cat5im2.jpg",
     price: 80,
     category: "Football",
     countInStock: 25,
@@ -203,7 +203,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Vapor Edge Elite 360 Premium",
-    image:"/images/с5_im3.jpg",
+    image:"/images/cat5im3.jpg",
     price: 180,
     category: "Football",
     countInStock: 14,
@@ -212,7 +212,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Vapor Edge Speed 360",
-    image:"/images/с5_im4.jpg",
+    image:"/images/cat5im4.jpg",
     price: 76,
     category: "Football",
     countInStock: 10,
@@ -221,7 +221,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Vapor Untouchable 3 Speed",
-    image:"/images/с5_im5.jpg",
+    image:"/images/cat5im5.jpg",
     price: 53,
     category: "Football",
     countInStock: 17,
@@ -230,7 +230,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Mercurial Vapor 13 Elite FG",
-    image:"/images/с6_im1.jpg",
+    image:"/images/cat6im1.jpg",
     price: 175,
     category: "Soccer",
     countInStock: 23,
@@ -239,7 +239,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Mercurial Vapor 13 Elite Neymar Jr. FG",
-    image:"/images/с6_im2.jpg",
+    image:"/images/cat6im2.jpg",
     price: 189,
     category: "Soccer",
     countInStock: 18,
@@ -248,7 +248,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Tiempo Legend 8 Elite FG",
-    image:"/images/с6_im3.jpg",
+    image:"/images/cat6im3.jpg",
     price: 138,
     category: "Soccer",
     countInStock: 21,
@@ -257,7 +257,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Phantom Venom Elite FG",
-    image:"/images/с6_im4.jpg",
+    image:"/images/cat6im4.jpg",
     price: 175,
     category: "Soccer",
     countInStock: 16,
@@ -266,7 +266,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Mercurial Superfly 7 Elite MDS FG",
-    image:"/images/с6_im5.jpg",
+    image:"/images/cat6im5.jpg",
     price: 206,
     category: "Soccer",
     countInStock: 11,
@@ -275,7 +275,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Air Zoom SuperRep",
-    image:"/images/с7_im1.jpg",
+    image:"/images/cat7im1.jpg",
     price: 120,
     category: "Training & Gym",
     countInStock: 21,
@@ -284,7 +284,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Metcon 5",
-    image:"/images/с7_im2.jpg",
+    image:"/images/cat7im2.jpg",
     price: 130,
     category: "Training & Gym",
     countInStock: 15,
@@ -293,7 +293,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Free Metcon 3",
-    image:"/images/с7_im3.jpg",
+    image:"/images/cat7im3.jpg",
     price: 120,
     category: "Training & Gym",
     countInStock: 14,
@@ -302,7 +302,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike SuperRep Go",
-    image:"/images/с7_im4.jpg",
+    image:"/images/cat7im4.jpg",
     price: 100,
     category: "Training & Gym",
     countInStock: 18,
@@ -311,7 +311,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Nike Free Metcon 3 AMP",
-    image:"/images/с7_im5.jpg",
+    image:"/images/cat7im5.jpg",
     price: 130,
     category: "Training & Gym",
     countInStock: 21,
@@ -320,7 +320,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike SB Shane",
-    image:"/images/с8_im1.jpg",
+    image:"/images/cat8im1.jpg",
     price: 80,
     category: "Skateboarding",
     countInStock: 10,
@@ -329,7 +329,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike SB Air Zoom Bruin Edge",
-    image:"/images/с8_im2.jpg",
+    image:"/images/cat8im2.jpg",
     price: 85,
     category: "Skateboarding",
     countInStock: 12,
@@ -338,7 +338,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike SB Zoom Stefan Janoski Canvas RM Premium",
-    image:"/images/с8_im3.jpg",
+    image:"/images/cat8im3.jpg",
     price: 90,
     category: "Skateboarding",
     countInStock: 8,
@@ -347,7 +347,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike SB Alleyoop",
-    image:"/images/с8_im4.jpg",
+    image:"/images/cat8im4.jpg",
     price: 60,
     category: "Skateboarding",
     countInStock: 10,
@@ -356,7 +356,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike SB Zoom Stefan Janoski Slip RM",
-    image:"/images/с8_im5.jpg",
+    image:"/images/cat8im5.jpg",
     price: 59,
     category: "Skateboarding",
     countInStock: 18,
@@ -365,7 +365,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Alpha Huarache Elite 2 Low",
-    image:"/images/с9_im1.jpg",
+    image:"/images/cat9im1.jpg",
     price: 76,
     category: "Baseball",
     countInStock: 14,
@@ -374,7 +374,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Force Zoom Trout 6 Turf",
-    image:"/images/с9_im2.jpg",
+    image:"/images/cat9im2.jpg",
     price: 120,
     category: "Baseball",
     countInStock: 19,
@@ -383,7 +383,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Alpha Huarache Elite 2 Turf",
-    image:"/images/с9_im3.jpg",
+    image:"/images/cat9im3.jpg",
     price: 62,
     category: "Baseball",
     countInStock: 14,
@@ -392,7 +392,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Nike Alpha Huarache Varsity Turf",
-    image:"/images/с9_im4.jpg",
+    image:"/images/cat9im4.jpg",
     price: 60,
     category: "Baseball",
     countInStock: 7,
@@ -401,7 +401,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Alpha Huarache Varsity Low MCS",
-    image:"/images/с9_im5.jpg",
+    image:"/images/cat9im5.jpg",
     price: 60,
     category: "Baseball",
     countInStock: 10,
@@ -410,7 +410,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Roshe G",
-    image:"/images/с10_im1.jpg",
+    image:"/images/cat10im1.jpg",
     price: 80,
     category: "Golf",
     countInStock: 15,
@@ -419,7 +419,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Air Max 1 G",
-    image:"/images/с10_im2.jpg",
+    image:"/images/cat10im2.jpg",
     price: 98,
     category: "Golf",
     countInStock: 17,
@@ -428,7 +428,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Nike Air Zoom Victory Tour",
-    image:"/images/с10_im3.jpg",
+    image:"/images/cat10im3.jpg",
     price: 134,
     category: "Golf",
     countInStock: 20,
@@ -437,7 +437,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Roshe G Tour",
-    image:"/images/с10_im4.jpg",
+    image:"/images/cat10im4.jpg",
     price: 82,
     category: "Golf",
     countInStock: 16,
@@ -446,7 +446,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike React Infinity Pro",
-    image:"/images/с10_im5.jpg",
+    image:"/images/cat10im5.jpg",
     price: 120,
     category: "Golf",
     countInStock: 12,
@@ -455,7 +455,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "NikeCourt Tech Challenge 20",
-    image:"/images/с11_im1.jpg",
+    image:"/images/cat11im1.jpg",
     price: 120,
     category: "Tennis",
     countInStock: 11,
@@ -464,7 +464,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "NikeCourt Air Zoom Vapor X",
-    image:"/images/с11_im2.jpg",
+    image:"/images/cat11im2.jpg",
     price: 113,
     category: "Tennis",
     countInStock: 20,
@@ -473,7 +473,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "NikeCourt Air Zoom Vapor Cage 4",
-    image:"/images/с11_im3.jpg",
+    image:"/images/cat11im3.jpg",
     price: 150,
     category: "Tennis",
     countInStock: 15,
@@ -482,7 +482,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "NikeCourt Lite 2",
-    image:"/images/с11_im4.jpg",
+    image:"/images/cat11im4.jpg",
     price: 48,
     category: "Tennis",
     countInStock: 19,
@@ -491,7 +491,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "NikeCourt Lite 2 Premium",
-    image:"/images/с11_im5.jpg",
+    image:"/images/cat11im5.jpg",
     price: 51,
     category: "Tennis",
     countInStock: 5,
@@ -500,7 +500,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Zoom Rival M 9",
-    image:"/images/с12_im1.jpg",
+    image:"/images/cat12im1.jpg",
     price: 65,
     category: "Track & Field",
     countInStock: 14,
@@ -509,7 +509,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Zoom Rival S 9",
-    image:"/images/с12_im2.jpg",
+    image:"/images/cat12im2.jpg",
     price: 65,
     category: "Track & Field",
     countInStock: 17,
@@ -518,7 +518,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Zoom Ja Fly 3",
-    image:"/images/с12_im3.jpg",
+    image:"/images/cat12im3.jpg",
     price: 125,
     category: "Track & Field",
     countInStock: 12,
@@ -527,7 +527,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike Zoom Pegasus Turbo 2",
-    image:"/images/с12_im4.jpg",
+    image:"/images/cat12im4.jpg",
     price: 162,
     category: "Track & Field",
     countInStock: 11,
@@ -536,7 +536,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Air Zoom Pegasus 36 Trail",
-    image:"/images/с12_im5.jpg",
+    image:"/images/cat12im5.jpg",
     price: 103,
     category: "Track & Field",
     countInStock: 20,
@@ -545,7 +545,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Epic React Flyknit 2",
-    image:"/images/с13_im1.jpg",
+    image:"/images/cat13im1.jpg",
     price: 119,
     category: "Walking",
     countInStock: 12,
@@ -554,7 +554,7 @@ const data = [{
     numReviews: 1,
   },{
     title: "Nike Zoom Pegasus Turbo 2",
-    image:"/images/с13_im2.jpg",
+    image:"/images/cat13im2.jpg",
     price: 143,
     category: "Walking",
     countInStock: 9,
@@ -563,7 +563,7 @@ const data = [{
     numReviews: 2,
   },{
     title: "Nike ZoomX Vaporfly NEXT%",
-    image:"/images/с13_im3.jpg",
+    image:"/images/cat13im3.jpg",
     price: 250,
     category: "Walking",
     countInStock: 25,
@@ -572,7 +572,7 @@ const data = [{
     numReviews: 3,
   },{
     title: "Nike Air Zoom Pegasus 36 Miami",
-    image:"/images/с13_im4.jpg",
+    image:"/images/cat13im4.jpg",
     price: 120,
     category: "Walking",
     countInStock: 17,
@@ -581,7 +581,7 @@ const data = [{
     numReviews: 0,
   },{
     title: "Nike Air Zoom Pegasus 34",
-    image:"/images/с13_im5.jpg",
+    image:"/images/cat13im5.jpg",
     price: 78,
     category: "Walking",
     countInStock: 8,

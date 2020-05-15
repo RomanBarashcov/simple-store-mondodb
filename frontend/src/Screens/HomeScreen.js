@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
-import { listCategories } from '../actions/categoryActions';
 import ReactStars from 'react-stars';
 
 function HomeScreen(props) {
@@ -40,7 +38,7 @@ function HomeScreen(props) {
   return <>
     {cat &&
       <h2>{cat.name}</h2>}
-
+{console.log(products)}
     <ul className="filter">
       <li>
         <form onSubmit={submitHandler}>
@@ -67,7 +65,6 @@ function HomeScreen(props) {
                 <div className="product">
                   <Link to={'/product/' + product._id}>
                     <img className="product-image" src={product.image} alt="product" />
-
                   </Link>
                   <div className="product-name">
                     <Link to={'/product/' + product._id}>{product.title}</Link>
