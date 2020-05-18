@@ -24,7 +24,6 @@ router.put('/:id', isAuth, async (req, res) => {
     }
 
     const data = await userService.updateUser(userId, user);
-    console.log(data)
     return res.send({ ...data });
 
   } catch (err) {

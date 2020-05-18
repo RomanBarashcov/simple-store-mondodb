@@ -1,29 +1,17 @@
 import express from 'express';
-import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
 import { upload } from '../utils/uploader';
-import fs from 'fs';
+import productRepository from '../repository/productRepository';
 
 const router = express.Router();
+
+const repositories = { productRepository };
+const productService = require('../services/productService')(repositories);
 
 router.get("/", async (req, res) => {
   try {
 
-    const category = req.query.category ? { category: req.query.category } : {};
-
-    const searchKeyword = req.query.searchKeyword ? {
-      title: {
-        $regex: req.query.searchKeyword,
-        $options: 'i'
-      }
-    } : {};
-
-    const sortOrder = req.query.sortOrder ?
-      (req.query.sortOrder === 'lowest' ? { price: 1 } : { price: -1 })
-      :
-      { _id: -1 };
-
-    let products = await Product.find({ ...category, ...searchKeyword }).sort(sortOrder);
+    const products = await productService.getAllProducts(req.query.category, req.query.searchKeyword, req.query.sortOrder)
     return res.send(products);
 
   } catch (err) {
@@ -35,16 +23,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     
-      const product = await Product.findOne({ _id: req.params.id }).populate("comments.user");
-      if (product) {
+    if(!req.params.id) throw "Incorrect Data payload!";
 
-        return res.send(product);
-
-      } else {
-
-        return res.status(404).send({ message: "Product Not Found." });
-
-      }
+    const productId = req.params.id;
+    const product = await productService.getProductById(productId);
+    
+    return res.send(product);
 
   } catch (err) {
     console.log(err);
@@ -55,25 +39,11 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", isAuth, isAdmin, async (req, res) => {
   try {
 
-      const productId = req.params.id;
-      const product = await Product.findById(productId);
+    if(!req.params.id) throw "Incorrect Data payload!";
 
-      if (product) {
-
-        product.title = req.body.title;
-        product.price = req.body.price;
-        product.category = req.body.category;
-        product.countInStock = req.body.countInStock;
-        product.description = req.body.description;
-
-        const updatedProduct = await product.save();
-        if (updatedProduct) {
-          return res.status(200).send({ message: 'Product Updated', data: updatedProduct });
-        }
-
-      }
-
-      return res.status(500).send({ message: ' Error in Updating Product.' });
+    const productId = req.params.id;
+    const updatedProduct = await productService.updateProduct(productId, { ...req.body });
+    return res.status(200).send({ message: 'Product Updated', data: updatedProduct });
       
   } catch (err) {
     console.log(err);
@@ -83,16 +53,12 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
 
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   try {
+    
+    if(!req.params.id) throw "Incorrect Data payload!";
 
-    const deletedProduct = await Product.findById(req.params.id);
-    if (deletedProduct) {
-
-      await deletedProduct.remove();
-      return res.send({ message: "Product Deleted" });
-
-    } else {
-      return res.send("Error in Deletion.");
-    }
+    const productId = req.params.id;
+    const deletedProductResult = await productService.removeProduct(productId)
+    return res.status(200).send({ message: 'Product Deleted', data: deletedProductResult });
 
   } catch (err) {
     console.log(err);
@@ -104,25 +70,9 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
 router.post("/", isAuth, isAdmin, async (req, res) => {
 try {
 
-    const product = new Product({
-
-      title: req.body.title,
-      price: req.body.price,
-      category: req.body.category,
-      countInStock: req.body.countInStock,
-      description: req.body.description,
-      rating: req.body.rating,
-      numReviews: req.body.numReviews,
-
-    });
-
-    const newProduct = await product.save();
-    if (newProduct) {
-      return res.status(201).send({ message: 'New Product Created', data: newProduct });
-    }
+    const newProduct = await productService.addProduct({...req.body})
+    return res.status(201).send({ message: 'New Product Created', data: newProduct });
     
-    return res.status(500).send({ message: ' Error in Creating Product.' });
-
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: err });
@@ -132,23 +82,14 @@ try {
 router.post("/:id/image", upload.single("myImage"), async (req, res, next) => {
   try {
 
+    if(!req.file.path || 
+      !req.params.id) throw "Incorrect Data payload!";
+
     const path = req.file.path;
-
-    const product = await Product.findById(req.params.id);
-    if(!product) return res.status(500).send({ message: 'Error in UpdateImage.' });
-
-    if(product.image) {
-          //remove old image from folder by path
-        fs.unlinkSync(req.file.path.slice(0,15) + product.image);
-    }
-
-    // save new image
-    product.image = path.slice(15);
-    const updatedProduct = await product.save();
-
-    if (updatedProduct) {
-      return res.status(200).send({ message: 'Product Updated', data: updatedProduct });
-    }
+    const productId = req.params.id;
+    
+    const updatedProduct = await productService.assignImageToProduct(productId, path);
+    return res.status(200).send({ message: 'Product Updated', data: updatedProduct });
 
   } catch (err) {
     console.log(err);

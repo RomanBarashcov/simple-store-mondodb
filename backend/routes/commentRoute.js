@@ -1,21 +1,21 @@
 import express from 'express';
-import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
+import productRepository from '../repository/productRepository';
 
 const router = express.Router();
+
+const repositories = { productRepository };
+const commentService = require('../services/commentService')(repositories);
 
 router.post("/delete", isAuth, isAdmin, async (req, res) => {
   try {
 
+    if(!req.body.productId || !req.body.commentId) throw "Incorrect data payload!";
+
     const productId = req.body.productId;
     const commentId = req.body.commentId;
 
-    let updateResult = await Product.updateOne({ _id: productId }, { 
-      $pull: { 
-        'comments': { _id: commentId } 
-      } 
-    });
-
+    const updateResult = await commentService.deleteComment(productId, commentId)
     if (updateResult) {
       return res.status(200).send({ message: 'Product Updated', data: updateResult });
     }
@@ -29,27 +29,10 @@ router.post("/delete", isAuth, isAdmin, async (req, res) => {
 router.post("/:productId", isAuth, async (req, res) => {
     try {
 
+      const productId = req.params.productId;
       const comment = req.body;
 
-      let product = await Product.findById(req.params.productId)
-      if(!product) return res.send("Error in add new comment.");
-
-      // cal reviews and rating
-      const numReviews = product.comments.length + 1;
-      const rating = (product.comments.reduce((acc, com) => acc + com.rating, 0) + comment.rating) / numReviews;
-
-      let updateResult = await Product.updateOne({ _id: req.params.productId }, {
-          numReviews: numReviews,
-          rating: rating,
-          $push: { 
-              comments: { 
-                  rating: comment.rating, 
-                  text: comment.text,
-                  user: comment.user 
-                } 
-            } 
-        });
-
+      const updateResult = await commentService.addCommentToProduct(productId, comment);
       if (updateResult) {
         return res.status(200).send({ message: 'Product Updated', data: updateResult });
       }
@@ -60,21 +43,18 @@ router.post("/:productId", isAuth, async (req, res) => {
     }
   });
 
-  router.put("/:productId", isAuth, async (req, res) => {
+  router.put("/:productId", isAuth, isAdmin, async (req, res) => {
     try {
   
+      if(!req.params.productId 
+        || !req.body.comment
+        || !req.body.comment.rating
+        || !req.body.comment.text) throw "Incorrect data payload!";
+
+      const productId = req.params.productId;
       const comment = req.body.comment;
       
-      const product = await Product.findById(req.params.productId)
-      if(!product) return res.send("Error in update comment.");
-  
-      let updateResult = await Product.updateOne({ 'comments._id' : comment._id }, { 
-          '$set': { 
-                'comments.$.raiting': comment.raiting,
-                'comments.$.text': comment.text
-            }
-        });
-
+      const updateResult = await commentService.updateComment(productId, comment)
       if (updateResult) {
         return res.status(200).send({ message: 'Product Updated', data: updateResult });
       }

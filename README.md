@@ -17,7 +17,7 @@ npm start
 
 ## frontend setup
 ```
-cd ./frontend
+cd /frontend
 ```
 ```
 npm install

@@ -45,9 +45,21 @@ const saveOrder = async (order) => {
     } 
 }
 
+const removeOrder = async (order) => {
+    try {
+
+        const result = await order.remove();
+        return result;
+
+    } catch (err) {
+        console.log(err);
+    } 
+}
+
 module.exports = {
     findAllOrders,
     findAllOrdersByUser,
     findOrderById,
-    saveOrder
+    saveOrder,
+    removeOrder
 }

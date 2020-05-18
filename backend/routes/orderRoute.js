@@ -1,13 +1,18 @@
 import express from 'express';
-import Order from '../models/orderModel';
 import { isAuth, isAdmin } from '../util';
+import orderRepository from '../repository/orderRepository';
 
 const router = express.Router();
+
+const repositories = { orderRepository }
+const orderService = require('../services/orderService')(repositories);
+const orderManager = require('../managers/orderManager')(repositories);
+const paymentManager = require('../managers/paymentManager')(repositories);
 
 router.get("/", isAuth, async (req, res) => {
   try {
 
-    const orders = await Order.find({}).populate('user');
+    const orders = await orderService.getAllOrders();
     return res.send(orders);
     
   } catch (err) {
@@ -19,7 +24,11 @@ router.get("/", isAuth, async (req, res) => {
 router.get("/mine", isAuth, async (req, res) => {
   try {
     
-    const orders = await Order.find({ user: req.user._id });
+    if(!req.user._id) throw "Incorrect data payload!";
+
+    const userId = req.user._id;
+    const orders = await orderService.getUserOrders(userId);
+    
     return res.send(orders);
 
   } catch (err) {
@@ -31,13 +40,12 @@ router.get("/mine", isAuth, async (req, res) => {
 router.get("/:id", isAuth, async (req, res) => {
 try {
 
-    const order = await Order.findOne({ _id: req.params.id });
+    if(!req.params.id) throw "Incorrect data payload!";
 
-    if (order) {
-      return res.send(order);
-    } else {
-      return res.status(404).send("Order Not Found.")
-    }
+    const orderId = req.params.id;
+    const order = await orderService.getOrderById(orderId);
+
+    return res.send(order);
 
   } catch (err) {
     console.log(err);
@@ -48,16 +56,12 @@ try {
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
 try {
 
-  const order = await Order.findOne({ _id: req.params.id });
+    if(!req.params.id) throw "Incorrect data payload!";
 
-    if (order) {
-      
-      const deletedOrder = await order.remove();
-      return res.send(deletedOrder);
+    const orderId = req.params.id;
 
-    } else {
-      return res.status(404).send("Order Not Found.")
-    }
+    const deletedOrder = await deleteOrder(orderId)
+    return res.send(deletedOrder);
 
   } catch (err) {
     console.log(err);
@@ -68,7 +72,7 @@ try {
 router.post("/", isAuth, async (req, res) => {
   try {
 
-    const newOrder = new Order({
+    const newOrder = {
       orderItems: req.body.orderItems,
       user: req.user._id,
       shipping: req.body.shipping,
@@ -77,9 +81,9 @@ router.post("/", isAuth, async (req, res) => {
       taxPrice: req.body.taxPrice,
       shippingPrice: req.body.shippingPrice,
       totalPrice: req.body.totalPrice,
-    });
+    };
 
-    const newOrderCreated = await newOrder.save();
+    const newOrderCreated = await orderManager.makeOrder(newOrder);
     return res.status(201).send({ message: "New Order Created", data: newOrderCreated });
 
   } catch (err) {
@@ -91,27 +95,20 @@ router.post("/", isAuth, async (req, res) => {
 router.put("/:id/pay", isAuth, async (req, res) => {
 try {
 
-    const order = await Order.findById(req.params.id);
-    console.log(order);
-    if (order) {
-
-      order.isPaid = true;
-      order.paidAt = Date.now();
-      order.payment = {
-        paymentMethod: 'paypal',
-        paymentResult: {
-          payerID: req.body.payerID,
-          orderID: req.body.orderID,
-          paymentID: req.body.paymentID
-        }
-      }
-
-      const updatedOrder = await order.save();
-      res.send({ message: 'Order Paid.', order: updatedOrder });
-
-    } else {
-      res.status(404).send({ message: 'Order not found.' })
+    if(!req.params.id ||
+      !req.body.payerID ||
+      !req.body.orderID) throw "Incorrect data payload!";
+    
+    const orderId = req.params.id;
+    const paymentData = {
+      payerID: req.body.payerID,
+      orderID: req.body.orderID,
+      paymentID: req.body.paymentID
     }
+  
+  const updatedOrder = paymentManager.makePayment(orderId, paymentData);
+  return res.send({ message: 'Order Paid.', order: updatedOrder });
+
 
   } catch (err) {
     console.log(err);

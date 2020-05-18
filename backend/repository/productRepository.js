@@ -72,6 +72,18 @@ const updateProductComment = async (comment) => {
     }
 }
 
+const createProduct = async (newProduct) => {
+    try {
+
+        const product = new Product({...newProduct});
+        const saveResult = await product.save();
+        return saveResult;
+
+    } catch (err){
+        console.log(err)
+    }
+}
+
 const saveProduct = async (product) => {
     try {
 
@@ -115,6 +127,7 @@ module.exports = {
     findProductById,
     addProductComment,
     updateProductComment,
+    createProduct,
     saveProduct,
     removeProduct,
     removeComment
